@@ -2,8 +2,11 @@ package at.mikemitterer.template
 
 class Greeter(private val name : String) {
     fun greet() {
-        println("Hello, $name")
+        println(message)
     }
+
+    val message:String
+        get() = "Hello, $name!"
 }
 
 fun main(args : Array<String>) {
