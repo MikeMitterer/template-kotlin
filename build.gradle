@@ -38,15 +38,17 @@ repositories {
     // mavenLocal()
 
     // Artifactory / Nexus 3
-    //      Die URL bzw. Username + Password sind in
+    //      URL and Username / Password are defined in 
     //          ~/.gradle/gradle.properties
-    //      definiert! (Sowohl am Mac als auch am Jenkins-Server)
-    maven {
-        url "${artifactory_url}/artifactory/libs-release-local/"
-        credentials {
-            username = "${artifactory_username}"
-            password = "${artifactory_password}"
-        }
-    }
+    //      (Must be set on your local machine (e.g. Mac and on your Jenkins-Server)
+
+    // Uncomment this if you use Artifactory!!!
+    // maven {
+    //    url "${artifactory_url}/artifactory/libs-release-local/"
+    //    credentials {
+    //        username = "${artifactory_username}"
+    //        password = "${artifactory_password}"
+    //    }
+    // }
 }
 
