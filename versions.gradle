@@ -1,0 +1,16 @@
+//-------------------------------------------------------------------------------------------------
+// Library Versions
+
+allprojects {
+
+    ext {
+        // Apache
+        commonsLang3Version         = "3.7"    // Version: https://goo.gl/u673sz
+        
+        kotlinVersion               = "1.2.+"  // Version: https://goo.gl/RriFBZ
+        kotlinTestVersion           = "2.+"
+
+        // Unit-Tests
+        junitVersion                = "4.12"   // Version: https://goo.gl/agmWKy
+    }
+}

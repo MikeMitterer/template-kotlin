@@ -1,0 +1,52 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.21"  // Version: https://goo.gl/RriFBZ
+    id "com.jfrog.artifactory" version "4.6.2"      // Version: https://goo.gl/WjN2LZ
+}
+
+apply plugin: "java"
+apply plugin: 'kotlin'
+apply plugin: "application"
+
+apply from: "versions.gradle"
+
+version = "0.0.1"
+mainClassName = "at.mikemitterer.template.MainKt"
+
+sourceSets {
+    deploy
+}
+
+dependencies {
+
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8',  version: kotlinVersion
+    //implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',      version: kotlinVersion
+
+    //implementation group: 'org.apache.commons', name: 'commons-lang3', version: commonsLang3Version
+
+    testImplementation group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: kotlinVersion
+    testImplementation group: 'io.kotlintest', name: 'kotlintest', version: kotlinTestVersion
+
+    // JUnit
+    testImplementation group: 'junit', name: 'junit', version: junitVersion
+}
+
+repositories {
+    // Migration from Maven to JCenter: https://goo.gl/d1zQT8
+    jcenter()
+
+    // Sollte eigentlich nicht benötigt werden
+    // mavenLocal()
+
+    // Artifactory / Nexus 3
+    //      Die URL bzw. Username + Password sind in
+    //          ~/.gradle/gradle.properties
+    //      definiert! (Sowohl am Mac als auch am Jenkins-Server)
+    maven {
+        url "${artifactory_url}/artifactory/libs-release-local/"
+        credentials {
+            username = "${artifactory_username}"
+            password = "${artifactory_password}"
+        }
+    }
+}
+
