@@ -4,6 +4,9 @@
 allprojects {
 
     ext {
+        // Logging
+        slf4jVersion                = "1.7.25" // Version: https://goo.gl/3gjvkC
+        
         // Apache
         commonsLang3Version         = "3.7"    // Version: https://goo.gl/u673sz
         
@@ -12,5 +15,6 @@ allprojects {
 
         // Unit-Tests
         junitVersion                = "4.12"   // Version: https://goo.gl/agmWKy
+        logbackVersion              = "1.1.+"  // Version: https://goo.gl/bUHtMT
     }
 }

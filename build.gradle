@@ -17,17 +17,20 @@ sourceSets {
 }
 
 dependencies {
+    // Logging ---------------------------------------------------------------------------------------------------------
+    implementation group: 'org.slf4j',                  name: 'slf4j-api',          version: slf4jVersion
 
-    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8',  version: kotlinVersion
+    implementation group: 'org.jetbrains.kotlin',       name: 'kotlin-stdlib-jdk8', version: kotlinVersion
     //implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',      version: kotlinVersion
 
     //implementation group: 'org.apache.commons', name: 'commons-lang3', version: commonsLang3Version
 
-    testImplementation group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: kotlinVersion
-    testImplementation group: 'io.kotlintest', name: 'kotlintest', version: kotlinTestVersion
+    // Test ------------------------------------------------------------------------------------------------------------
+    testImplementation group: 'junit',                  name: 'junit',              version: junitVersion
+    testImplementation group: 'ch.qos.logback', 	    name: 'logback-classic', 	version: logbackVersion
 
-    // JUnit
-    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.jetbrains.kotlin',   name: 'kotlin-test-junit',  version: kotlinVersion
+    testImplementation group: 'io.kotlintest',          name: 'kotlintest',         version: kotlinTestVersion
 }
 
 repositories {

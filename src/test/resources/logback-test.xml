@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<!-- Layouts (Pattern                                               -->
+<!--    http://logback.qos.ch/manual/layouts.html                   -->
+<!--    http://logback.qos.ch/manual/appenders.html                 -->
+<!--                                                                -->
+<configuration debug="true" scan="true">
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{HH:mm:ss.SSS} |-%-4level in %-20logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="Console"/>
+    </root>
+
+    <logger name="org.apache.ibatis" level="INFO"/>
+    <logger name="ch.qos.logback.classic" level="WARN"/>
+    <logger name="at.mikemitterer.mobiad.server.guice.module.ServletModule" level="WARN"/>
+    <logger name="at.mikemitterer" level="INFO"/>
+
+    <!-- SQL logging configuration.
+    <logger name="at.mikemitterer.mobiad.server.persistance" level="DEBUG"/>
+    -->
+
+</configuration>
