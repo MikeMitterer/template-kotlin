@@ -10,6 +10,7 @@ Go to cloned dir
     cd <new Project>
 
 Change the root-Project-Name
+Make sure the new name is lowercase and has no space in it
 
     sed -i -e 's/kotlin-templat/<new project name>/' settings.gradle
 
