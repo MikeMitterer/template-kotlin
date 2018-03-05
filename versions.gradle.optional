@@ -1,0 +1,20 @@
+//-------------------------------------------------------------------------------------------------
+// Library Versions
+
+allprojects {
+
+    ext {
+        // Logging
+        version_slf4j                = "1.7.25" // Version: https://goo.gl/3gjvkC
+        
+        // Apache
+        version_commonsLang3         = "3.7"    // Version: https://goo.gl/u673sz
+        
+        version_kotlin               = "1.2.+"  // Version: https://goo.gl/RriFBZ
+        version_kotlinTest           = "2.+"
+
+        // Unit-Tests
+        version_junit                = "4.12"   // Version: https://goo.gl/agmWKy
+        version_logback              = "1.1.+"  // Version: https://goo.gl/bUHtMT
+    }
+}

@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.21"  // Version: https://goo.gl/RriFBZ
+    id "org.jetbrains.kotlin.jvm" version "1.2.30"  // Version: https://goo.gl/RriFBZ
     id "com.jfrog.artifactory" version "4.6.2"      // Version: https://goo.gl/WjN2LZ
 }
 
@@ -7,7 +7,9 @@ apply plugin: "java"
 apply plugin: 'kotlin'
 apply plugin: "application"
 
-apply from: "versions.gradle"
+// [ Optional ]
+// Rename versions.gradle.optinal to versions.gradle and include this file as below
+// apply from: "versions.gradle"
 
 version = "0.0.1"
 mainClassName = "at.mikemitterer.template.MainKt"
@@ -18,19 +20,19 @@ sourceSets {
 
 dependencies {
     // Logging ---------------------------------------------------------------------------------------------------------
-    implementation group: 'org.slf4j',                  name: 'slf4j-api',          version: slf4jVersion
+    implementation group: 'org.slf4j',                  name: 'slf4j-api',          version: version_slf4j
 
-    implementation group: 'org.jetbrains.kotlin',       name: 'kotlin-stdlib-jdk8', version: kotlinVersion
-    //implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',      version: kotlinVersion
+    implementation group: 'org.jetbrains.kotlin',       name: 'kotlin-stdlib-jdk8', version: version_kotlin
+    //implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',      version: version_kotlin
 
-    //implementation group: 'org.apache.commons', name: 'commons-lang3', version: commonsLang3Version
+    //implementation group: 'org.apache.commons', name: 'commons-lang3', version: version_commonsLang3
 
     // Test ------------------------------------------------------------------------------------------------------------
-    testImplementation group: 'junit',                  name: 'junit',              version: junitVersion
-    testImplementation group: 'ch.qos.logback', 	    name: 'logback-classic', 	version: logbackVersion
+    testImplementation group: 'junit',                  name: 'junit',              version: version_junit
+    testImplementation group: 'ch.qos.logback', 	    name: 'logback-classic', 	version: version_logback
 
-    testImplementation group: 'org.jetbrains.kotlin',   name: 'kotlin-test-junit',  version: kotlinVersion
-    testImplementation group: 'io.kotlintest',          name: 'kotlintest',         version: kotlinTestVersion
+    testImplementation group: 'org.jetbrains.kotlin',   name: 'kotlin-test-junit',  version: version_kotlin
+    testImplementation group: 'io.kotlintest',          name: 'kotlintest',         version: version_kotlinTest
 }
 
 repositories {
