@@ -18,6 +18,10 @@ Make sure the new name is lowercase and has no space in it
 Remove your `.git` Folder
 
     rm -rf .git
+    
+Deploy your lib
+
+    gradle deploy    
 
         
 
