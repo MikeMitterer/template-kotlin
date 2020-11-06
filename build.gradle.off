@@ -1,3 +1,9 @@
+/* -------------------------------------------------------------------------------------------------
+Update des Gradle-Wrappers
+    VERSION=$(/usr/local/bin/gradle --version | grep -C 0 "Gradle " | sed "s/Gradle //"); \
+    gradle wrapper --gradle-version "$VERSION"
+*/
+
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.51"  // Version: https://goo.gl/RriFBZ
 
@@ -17,7 +23,7 @@ apply plugin: "application"
 // Rename versions.gradle.optional to versions.gradle and include this file as below
 // apply from: "versions.gradle"
 
-version = "0.0.1"
+version = "0.0.3"
 group = "at.mikemitterer"
 mainClassName = "at.mikemitterer.template.MainKt"
 
