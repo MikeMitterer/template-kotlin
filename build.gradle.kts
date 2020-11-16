@@ -172,7 +172,7 @@ tasks {
      * Alle weiteren Schritte werden von build.jenkins erledigt
      *
      * installDist installiert die App in
-     *      ./build/install/kotlin-template
+     *      .e/build/install/kotlin-template
      *
      * Weitere Infos zum styled output:
      *      https://www.thetopsites.net/article/52493357.shtml

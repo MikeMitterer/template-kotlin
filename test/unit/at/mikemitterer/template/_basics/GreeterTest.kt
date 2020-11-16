@@ -1,5 +1,6 @@
-package at.mikemitterer.template
+package at.mikemitterer.template._basics
 
+import at.mikemitterer.template.Greeter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
