@@ -244,7 +244,7 @@ class CoroutinesTest {
      * Funktioniert nur mit runBlockingTest - nicht mit runBlocking<Unit>
      */
     @Test
-    fun testExceptionInAsync() = runBlockingTest {
+    fun testExceptionInAsync() = runBlocking<Unit> {
         var foundException = false
 
         val job = async<Boolean> {
@@ -263,5 +263,31 @@ class CoroutinesTest {
 
         // Im Gegensatz zu "launch" cancelt async
         assertThat(job.isCancelled).isTrue
+    }
+
+    @Test
+    fun testWaitForLaunchToBeFinished() = runBlocking<Unit> {
+        logger.info("Start...")
+        val time = measureTimeMillis {
+            // Die beiden launch müssen fertig werden bevor
+            // coroutineScope fertig wird
+            coroutineScope {
+                launch {
+                    repeat(10) {
+                        delay(200)
+                        logger.info("Loop1")
+                    }
+                }
+
+                launch {
+                    repeat(10) {
+                        delay(200)
+                        logger.info("Loop2")
+                    }
+                }
+            }
+        }
+        logger.info("Took ${time}ms, Ende...")
+        assertThat(time).isBetween(2000, 2100)
     }
 }
