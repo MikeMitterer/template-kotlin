@@ -23,6 +23,99 @@ class CoroutinesTest {
         )
     }
 
+    @Test
+    fun testNamingCoroutineThings() {
+        val dispatcher = Dispatchers.IO
+
+        // Blockt den Thread in dem sie aufgerufen wurde
+        runBlocking<Unit> {
+            println("[1] My context is: $coroutineContext")
+            println("[1] My Job is: ${coroutineContext.job}")
+        }
+
+        // launch, async usw. erstellen eine Coroutine, benötigen
+        // dazu einen Scope
+        val job = CoroutineScope(dispatcher).launch {
+            println("[2] My context is: $coroutineContext")
+        }
+        // Darf nur innerhalb eine coroutine oder innerhalb einer suspend-Funktion aufgerufen werde
+        // job.join()
+
+        // GlobalScope is a instance of scope that is global
+        GlobalScope.launch(Dispatchers.Default) {
+            println("[3] My context is: ${coroutineContext}")
+        }
+
+        // KA was das ist?????
+        with(CoroutineScope(dispatcher)) {
+            println("[4] My context is: $coroutineContext.")
+        }
+
+        runBlocking {
+            // coroutineScope ist eine globale suspend-Funktion die einen
+            // neuen CoroutineScope erstellt und wartet bis die Funktion selbst und
+            // alle alle Child-Suspend-Functions beendet sind.
+            //
+            // coroutineScope ist eine suspend-Funktion und kann nicht außerhalb eine
+            // Coroutine aufgerufen werden
+            coroutineScope { // Creates a new coroutine scope
+                launch {
+                    delay(500L)
+                    println("Task from nested launch")
+                }
+
+                delay(100L)
+                println("Task from coroutine scope") // This line will be printed before nested launch
+            }
+        }
+
+        // Produziert folgenden output:
+        //     Vor convention-Function
+        //         Inside launch - vor convention-Function
+        //             [1] Inside 'conventionCallingSuspendFunction' waiting 1000ms...
+        //             [1] 'conventionCallingSuspendFunction' finished!
+        //         Inside launch - NACH convention-Function
+        //     Nach convention-Function
+        runBlocking {
+            println("Vor convention-Function")
+            // val job2 = CoroutineScope(Dispatchers.Default).launch {
+                println("    Inside launch - vor convention-Function")
+                conventionCallingSuspendFunction(1)
+                println("    Inside launch - NACH convention-Function")
+            // }
+            println("Nach convention-Function")
+            // job.join()
+        }
+
+        // Produziert folgenden output:
+        //     Vor convention-Function
+        //         Inside launch - vor convention-Function
+        //         Inside launch - NACH convention-Function
+        //     Nach convention-Function
+        //                 [1] Inside 'conventionCallingSuspendFunction' waiting 1000ms...
+        //                 [2] Inside 'conventionCallingSuspendFunction' waiting 1000ms...
+        //                 [1] 'conventionCallingSuspendFunction' finished!
+        //                 [2] 'conventionCallingSuspendFunction' finished!
+
+        runBlocking {
+            println("Vor convention-Function")
+            // val job2 = CoroutineScope(Dispatchers.Default).launch {
+            println("    Inside launch - vor convention-Function")
+            launch {
+                conventionCallingSuspendFunction(1)
+            }
+            launch {
+                conventionCallingSuspendFunction(2)
+            }
+            println("    Inside launch - NACH convention-Function")
+            // }
+            println("Nach convention-Function")
+            // job.join()
+        }
+
+
+    }
+
     /**
      * runBlocking blockt den Main-Thread
      */
@@ -290,4 +383,10 @@ class CoroutinesTest {
         logger.info("Took ${time}ms, Ende...")
         assertThat(time).isBetween(2000, 2100)
     }
+}
+
+suspend fun conventionCallingSuspendFunction(id: Int) = withContext(Dispatchers.Default) {
+    println("       [$id] Inside 'conventionCallingSuspendFunction' waiting 1000ms...")
+    delay(1000)
+    println("       [$id] 'conventionCallingSuspendFunction' finished!")
 }
