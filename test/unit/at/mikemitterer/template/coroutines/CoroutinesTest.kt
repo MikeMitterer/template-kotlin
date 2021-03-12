@@ -314,9 +314,7 @@ class CoroutinesTest {
     fun testExceptionInLaunch2() = runBlocking<Unit> {
         var foundException = false
 
-        var job: Job? = null
-
-        job = launch {
+        val job = launch {
             try {
                 delay(200)
                 throw IllegalArgumentException("Crash nach 200ms")
@@ -337,7 +335,7 @@ class CoroutinesTest {
      * Funktioniert nur mit runBlockingTest - nicht mit runBlocking<Unit>
      */
     @Test
-    fun testExceptionInAsync() = runBlocking<Unit> {
+    fun testExceptionInAsync() = runBlockingTest {
         var foundException = false
 
         val job = async<Boolean> {

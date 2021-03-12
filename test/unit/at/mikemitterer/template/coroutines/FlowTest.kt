@@ -99,7 +99,7 @@ class FlowTest {
             }
         }
 
-        var job: Deferred<Unit>? = null
+        val job: Deferred<Unit>?
 
         // Der Timer bricht den Job ab wenn nicht innerhalb von
         // 5secs ein Event (nummer) kommt
@@ -138,5 +138,30 @@ class FlowTest {
 
         assertThat(firstNumber).isEqualTo(-1)
         // timeout.cancel()
+    }
+
+    /**
+     * Ziel ist diese Ausgabe:
+     *     Number: 1
+     *     Number: 2
+     *     Number: 1
+     *     Number: 3
+     */
+    @FlowPreview
+    @Test
+    fun testDebounce()  = runBlockingTest {
+        val numberFlow = listOf(1,2,1,1,3).asFlow()
+        var prevValue = -1
+
+        numberFlow
+            .transform { value ->
+                if(value != prevValue) {
+                    prevValue = value
+                    return@transform emit(value)
+                }
+            }
+            .collect {
+                println("Number: $it")
+            }
     }
 }

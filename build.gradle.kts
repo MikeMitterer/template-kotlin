@@ -27,7 +27,7 @@ val gson_version: String by project
 
 plugins {
     // id("java")
-    kotlin("jvm") version "1.4.10"  // Version: https://goo.gl/RriFBZ
+    kotlin("jvm") version "1.4.31"  // Version: https://bit.ly/3qzDy0Y
 
     // [ Optional ]
     // Only if you use Artifactory - see below
