@@ -2,6 +2,8 @@
 Update des Gradle-Wrappers
     VERSION=$(/usr/local/bin/gradle --version | grep -C 0 "Gradle " | sed "s/Gradle //"); \
     gradle wrapper --gradle-version "$VERSION"
+    oder
+    gradle wrapper --gradle-version "7.5"
 */
 
 @file:Suppress("PropertyName")
@@ -27,7 +29,7 @@ val gson_version: String by project
 
 plugins {
     // id("java")
-    kotlin("jvm") version "1.4.31"  // Version: https://bit.ly/3qzDy0Y
+    kotlin("jvm") version "1.7.+"  // Version: https://bit.ly/3qzDy0Y
 
     // [ Optional ]
     // Only if you use Artifactory - see below
@@ -45,7 +47,7 @@ plugins {
 version = "0.0.1"
 group = "at.mikemitterer.template"
 
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+// java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 // Weitere Infos:
 //      https://docs.gradle.org/current/userguide/application_plugin.html
@@ -162,7 +164,7 @@ tasks.withType<Test> {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        // jvmTarget = "1.8"
     }
 }
 
